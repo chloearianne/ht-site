@@ -2,4 +2,4 @@
 deployment:
  tasks:
  - export DEPLOYPATH=/home/kpgys2xliuld/public_html/
- - /bin/cp -Rgit push -u origin HEAD ./* $DEPLOYPATH
+ - /bin/cp -R ./* $DEPLOYPATH
