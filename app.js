@@ -9,7 +9,7 @@ var things = require('./things.js');
 app.use('/', things);
 
 const server = http.createServer(app);
-const port = 3000;
+const port = 60000;
 server.listen(port);
 
 console.debug('Server listening on port ' + port);
