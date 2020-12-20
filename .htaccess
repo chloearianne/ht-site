@@ -1,1 +1,2 @@
-DirectoryIndex app.js
+RewriteEngine On
+RewriteRule ^myapp/(.*) http://localhost:60000/$1 [P]
