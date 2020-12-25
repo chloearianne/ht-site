@@ -6,20 +6,15 @@ const app = express();
 app.use(cors());
 
 app.get('/status', function(req, res){
-    console.log(req.get('host'))
-    var status = IS_DEAD ? "dead" : "alive";
-    console.log("he ", status)
-    res.send(status);
-});
-app.get('/', function(req, res){
-    console.log(req.get('host'))
-    var status = IS_DEAD ? "dead" : "alive";
-    console.log("he ", status)
-    res.send(status);
+    console.log("he ", IS_DEAD)
+    res.send({ 
+        isDead: IS_DEAD, 
+        timeAlive: TIME_ALIVE,
+        recordTime: RECORD_TIME
+    });
 });
 
 const server = http.createServer(app);
-
 
 var io = require('socket.io')(server, {
     cors: {
@@ -28,10 +23,8 @@ var io = require('socket.io')(server, {
     }
 });
 
-const port = 80;
-
+const port = 3000;
 server.listen(port);
-//console.debug('Server listening on port ' + port + ' and hostname ' + hostname);
 console.debug('Server listening on port ' + port)
 
 var interval;
@@ -41,7 +34,7 @@ io.on("connection", (socket) => {
     if (interval) {
         clearInterval(interval);
     }
-    interval = setInterval(() => emitStatusData(socket), 1000);
+    interval = setInterval(() => emitStatusData(socket), 500);
 
     socket.on('disconnect', function() {
         currentVisitors--; 
@@ -51,11 +44,17 @@ io.on("connection", (socket) => {
 });
 
 const emitStatusData = (socket) => {
-    const response = IS_DEAD
+    const response = {
+        isDead: IS_DEAD,
+        timeAlive: TIME_ALIVE,
+        recordTime: RECORD_TIME,
+    }
     socket.emit("FromAPI", response);
 };
 
-
+var INIT_TIME = new Date().getTime();
+var TIME_ALIVE;
+var RECORD_TIME = 0;
 var IS_DEAD = true;
 var currentVisitors = 0;
 async function updateLivingStatus() {
@@ -63,12 +62,23 @@ async function updateLivingStatus() {
         console.log(currentVisitors)
         if (currentVisitors > 0) {
             console.log("turble lives! ")
-            IS_DEAD = false;
+            if (IS_DEAD) {
+                IS_DEAD = false;
+                INIT_TIME = new Date().getTime()
+            }
+            TIME_ALIVE = new Date().getTime() - INIT_TIME
+            RECORD_TIME = Math.max(RECORD_TIME, TIME_ALIVE)
         } else {
             console.log("turble died :( ")
-            IS_DEAD = true;
+            if (!IS_DEAD) {
+                RECORD_TIME = Math.max(RECORD_TIME, TIME_ALIVE)
+                TIME_ALIVE = 0;
+                IS_DEAD = true;   
+                await sleep(5000);
+            }
+
         }
-        await sleep(10000);
+        await sleep(500);
     }
 }
 
