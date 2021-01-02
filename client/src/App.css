@@ -1,0 +1,134 @@
+.main {
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  color: grey;
+  line-height: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bubble {
+  position: fixed;
+  right: 375px;
+  top: 50px;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  width: 100px;
+  background: #fff;
+  border-radius: 40px;
+  padding: 24px;
+  text-align: center;
+  color: grey;
+  border-left: 2px solid lightgray;
+  border-right: 2px solid lightgray;
+  border-top: 2px solid lightgray;
+  border-bottom: 2px solid lightgray;
+}
+
+.bubble-bottom-left:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 24px solid lightgray;
+  border-right: 12px solid transparent;
+  border-top: 12px lightgray;
+  border-bottom: 20px solid transparent;
+  left: 32px;
+  bottom: -20px;
+}
+
+.dead {
+  width: 400px;
+  height: 650px;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  background-image: url('./assets/dead.jpg');
+}
+
+/* .dead {
+  margin-right: 0;
+  vertical-align: middle;
+  width: 80px;
+  height: 32px;
+  background-position: 0 0;
+  background-image: url('./assets/pray_right.png');
+  -webkit-animation: dead 0.68s steps(17) infinite;
+  animation: dead 0.68s steps(17) infinite;
+  animation-duration: 0.68s;
+  animation-timing-function: steps(17);
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: dead;
+}
+
+@keyframes dead {
+  100% {
+      background-position: -1360px;
+      background-position-x: -1360px;
+      background-position-y: center;
+  }
+} */
+
+
+.alive {
+  width: 400px;
+  height: 650px;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+  background-image: url('./assets/alive.gif');
+}
+
+/* 
+.alive {
+  margin-right: 0;
+  vertical-align: middle;
+  width: 80px;
+  height: 32px;
+  background-position: 0 0;
+  background-image: url('./assets/pray_right.png');
+  -webkit-animation: alive 0.68s steps(17) infinite;
+  animation: alive 0.68s steps(16) infinite;
+  animation-duration: 0.68s;
+  animation-timing-function: steps(16);
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: alive;
+}
+
+@keyframes alive {
+  100% {
+      background-position: -1360px;
+      background-position-x: -1360px;
+      background-position-y: center;
+  }
+} */
